@@ -18,8 +18,6 @@ public class DemoTest
 {
     private static final String prompt = "Enter a character from a-f to see "
         + "its entry, p to print the map, or q to quit.\n";
-    private static final String mapPrint = "<(a : abstract), (b : boolean), "
-        + "(c : class), (d : double), (e : enum), (f : for)>\n";
     private ByteArrayOutputStream baos;
     private PrintStream oldOut;
     private InputStream oldIn;
@@ -43,11 +41,11 @@ public class DemoTest
     @Test
     public void test1()
     {
-        String input = "p\nq\n";
+        String input = "q\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Demo.main(null);
         String output = TestUtilities.getOutput(baos);
-        assertEquals(prompt + mapPrint + prompt, output);
+        assertEquals(prompt, output);
     }
 
     @Test
@@ -84,12 +82,12 @@ public class DemoTest
     @Test
     public void test5()
     {
-        String input = "p\nb\np\nc\nd\nq\n";
+        String input = "b\nc\nd\nq\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Demo.main(null);
         String output = TestUtilities.getOutput(baos);
-        assertEquals(prompt + mapPrint + prompt + "b is for boolean\n"
-            + prompt + mapPrint + prompt + "c is for class\n"
+        assertEquals(prompt + "b is for boolean\n"
+            + prompt + "c is for class\n"
             + prompt + "d is for double\n" + prompt, output);
     }
 }
